@@ -13,8 +13,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_blue:
-    path: ../
+  flutter_blue: ^0.5.0
+#    path: ../
 
 flutter:
   uses-material-design: true

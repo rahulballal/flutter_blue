@@ -73,10 +73,11 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
   _startScan() {
     _scanSubscription = _flutterBlue
         .scan(
-      timeout: const Duration(seconds: 5),
-      /*withServices: [
-          new Guid('0000180F-0000-1000-8000-00805F9B34FB')
-        ]*/
+      timeout: const Duration(seconds: 15), // This determines how long the scanning needs to happen
+       withServices: [
+//          new Guid('0000180F-0000-1000-8000-00805F9B34FB')
+         new Guid('6E400001-B5A3-F393-E0A9-E50E24DCCA9E')
+       ]
     )
         .listen((scanResult) {
       print('localName: ${scanResult.advertisementData.localName}');
@@ -310,7 +311,7 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
-          title: const Text('FlutterBlue'),
+          title: const Text('Powesensor Blue'),
           actions: _buildActionButtons(),
         ),
         floatingActionButton: _buildScanningButton(),
