@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -137,8 +138,9 @@ class FlutterBlueAppState extends State<FlutterBlueApp> {
     setState(() {});
   }
 
-  _writeCharacteristic(BluetoothCharacteristic c) async {
-    await device.writeCharacteristic(c, [0x12, 0x34],
+  _writeCharacteristic(BluetoothCharacteristic c, String message) async {
+    var characteristic = utf8.encode(message); // Encode string to UTF-8
+    await device.writeCharacteristic(c, characteristic,
         type: CharacteristicWriteType.withResponse);
     setState(() {});
   }
@@ -216,7 +218,7 @@ class FlutterBlueAppState extends State<FlutterBlueApp> {
                       (c) => new CharacteristicTile(
                             characteristic: c,
                             onReadPressed: () => _readCharacteristic(c),
-                            onWritePressed: () => _writeCharacteristic(c),
+                            onWritePressed: () => _writeCharacteristic(c, "nwk(1)\n"),
                             onNotificationPressed: () => _setNotification(c),
                             descriptorTiles: c.descriptors
                                 .map(
